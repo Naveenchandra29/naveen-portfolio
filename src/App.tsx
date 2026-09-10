@@ -93,23 +93,16 @@ function Projects() {
 type AchievementEvidence = { image: string; title: string; description: string; alt: string; link?: string; action?: string }
 
 const achievementEvidence: AchievementEvidence[] = [
-  { image: '/achievements/awards/i2connect-award.jpg', title: 'Best Project Innovation Award', description: 'I2CONNECT — IEEE Mangalore Section.', alt: 'I2CONNECT Best Project Innovation Award evidence' },
-  { image: '/achievements/awards/project-competition.jpg', title: 'Project Competition', description: 'Project competition evidence.', alt: 'Project competition evidence' },
-  { image: '/achievements/awards/mavensiliconworkshop.png', title: 'Maven Silicon Workshop', description: '', alt: 'Maven Silicon workshop evidence' },
-  { image: '/achievements/awards/manthan2025.png', title: 'Manthan 2025', description: '', alt: 'Manthan 2025 recognition evidence' },
-  { image: '/achievements/awards/infosysspringboard.png', title: 'Infosys Springboard', description: '', alt: 'Infosys Springboard evidence' },
-  { image: '/achievements/awards/ieeemembership.png', title: 'IEEE Membership', description: '', alt: 'IEEE membership evidence' },
-  { image: '/achievements/awards/code6crazehackathon.png', title: 'Code6Craze Hackathon', description: '', alt: 'Code6Craze hackathon evidence' },
-  { image: '/achievements/awards/sqlbasicshackerrank.png', title: 'SQL Basics HackerRank', description: '', alt: 'HackerRank SQL Basics evidence' },
-  { image: '/achievements/awards/quantumworkshopdsu.png', title: 'Quantum Workshop DSU', description: '', alt: 'Quantum workshop at DSU evidence' },
-  { image: '/achievements/awards/quantumworkshopamc.png', title: 'Quantum Workshop AMC', description: '', alt: 'Quantum workshop at AMC evidence' },
-  { image: '/achievements/awards/volunteering.png', title: 'Volunteering', description: '', alt: 'Volunteering recognition evidence' },
-  { image: '/achievements/awards/vicharamanthanaworkshop.png', title: 'Vicharamanthan Workshop', description: '', alt: 'Vicharamanthan workshop evidence' },
-  { image: '/achievements/awards/workshoponwheelsmysore.png', title: 'Workshop on Wheels Mysore', description: '', alt: 'Workshop on Wheels Mysore evidence' },
-  { image: '/achievements/publications/researchpaper.png', title: 'Oral Cancer Detection Using Raspberry Pi and CNN for Early Diagnosis', description: '', alt: 'Oral Cancer Detection research paper preview', link: '/achievements/publications/researchpaper.pdf', action: 'VIEW PAPER ↗' },
-  { image: '/achievements/patents/oral-cancer-patent.png', title: 'Oral Cancer Detection', description: '', alt: 'Oral Cancer Detection patent evidence preview', action: 'VIEW PATENT ↗' },
-  { image: '/achievements/patents/matrix-headlight-patent.png', title: 'Matrix Headlight', description: '', alt: 'Matrix Headlight patent evidence preview', action: 'VIEW PATENT ↗' },
-] as const
+  { image: '/achievements/awards/i2connect-award.jpg', title: 'Best Project Innovation Award', description: 'Secured First Place at IEEE I2CONNECT-2025 for the Matrix Headlight project.', alt: 'Secured First Place at IEEE I2CONNECT-2025 for the Matrix Headlight project' },
+  { image: '/achievements/awards/ieeemembership.png', title: 'IEEE Membership', description: 'Member of the IEEE Signal Processing Society, with active participation in technical activities and workshops.', alt: 'IEEE membership evidence' },
+  { image: '/achievements/awards/NIE Mysore.png', title: 'Best Project Presentation', description: 'Recognition associated with participation in a technical event at the National Institute of Engineering, Mysore.', alt: 'NIE Mysore recognition evidence' },
+  { image: '/achievements/workshops/quantumworkshopamc.png', title: 'Quantum Computing Basics Workshop— AMC', description: 'Served as a speaker at AMC Engineering College, delivering a hands-on session introducing quantum computing fundamentals, concepts, and emerging technological applications.', alt: 'Quantum Computing Basics workshop at AMC evidence' },
+  { image: '/achievements/workshops/quantumworkshopdsu.png', title: 'Quantum Computing Basics Workshop— DSU', description: 'Delivered a hands-on quantum computing workshop at Dayananda Sagar College of Engineering, explaining core concepts and connecting emerging quantum technologies with practical applications.', alt: 'Quantum Computing Basics workshop at DSU evidence' },
+  { image: '/achievements/publications/grant.png', title: 'Project Grant Received', description: 'Received ₹6,000 KSCST funding for the Oral Cancer Detection project under the Student Project Programme.', alt: 'Government project grant evidence' },
+  { image: '/achievements/publications/researchpaper.png', title: 'Oral Cancer Detection Using Raspberry Pi and CNN for Early Diagnosis', description: 'Published the CNN-driven Raspberry Pi framework for multi-class oral lesion diagnosis in IJCRT.', alt: 'Oral Cancer Detection research paper preview', link: '/achievements/publications/researchpaper.pdf', action: 'VIEW PAPER ↗' },
+  { image: '/achievements/patents/oral-cancer-patent.png', title: 'PATENT - Oral Cancer Detection', description: 'Patent application covering a Raspberry Pi and CNN-based system for early oral cancer detection.', alt: 'Oral Cancer Detection patent evidence preview', action: 'VIEW PATENT ↗' },
+  { image: '/achievements/patents/matrix-headlight-patent.png', title: 'PATENT - Matrix Headlight', description: 'Patent application for a smart weather-adaptive matrix LED headlight system for modern vehicles.', alt: 'Matrix Headlight patent evidence preview', action: 'VIEW PATENT ↗' },
+]
 
 function Recognition() {
   return <div className="recognition"><Reveal><div className="recognition-heading"><h3>Professional Highlights.</h3></div></Reveal><EvidencePreview /></div>
