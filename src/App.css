@@ -135,6 +135,24 @@ main { width:100%; margin:0; }
 
 .project-visual { min-height:0; aspect-ratio:16 / 9; }
 .project-visual img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .3s ease,filter .3s ease; }
+.recognition { margin-top:78px; padding-top:30px; border-top:1px solid var(--border); }
+.recognition-heading { display:grid; grid-template-columns:180px minmax(0,1fr); gap:34px; align-items:baseline; padding-bottom:20px; border-bottom:1px solid var(--border); }
+.recognition-heading .eyebrow { margin:0; }
+.recognition-heading h3 { margin:0; font-family:var(--heading); font-size:clamp(1.8rem,3vw,2.8rem); font-weight:500; }
+.recognition-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 32px; }
+.recognition-item { padding:22px 0; border-bottom:1px solid var(--border); }
+.recognition-item span,.highlight-area .eyebrow { color:var(--coral); font-family:var(--mono); font-size:.7rem; letter-spacing:.08em; }
+.recognition-item h4 { margin:12px 0 7px; font-family:var(--heading); font-size:1.16rem; font-weight:500; }
+.recognition-item p { margin:0; color:var(--muted); font-size:.94rem; line-height:1.5; }
+.highlight-area { margin-top:36px; padding-top:22px; border-top:1px solid var(--border); }
+.highlight-area h4 { margin:10px 0 8px; font-family:var(--heading); font-size:1.35rem; font-weight:500; }
+.highlight-empty { max-width:680px; margin:0; color:var(--muted); font-size:.9rem; line-height:1.5; }
+.highlight-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.highlight-grid article { display:grid; gap:8px; padding:14px; border:1px solid var(--border); background:var(--surface); }
+.highlight-grid img { width:100%; aspect-ratio:4 / 3; object-fit:cover; }
+.highlight-grid strong,.highlight-grid span { font-family:var(--mono); font-size:.7rem; }
+.highlight-grid p { margin:0; color:var(--muted); font-size:.85rem; line-height:1.45; }
+@media (max-width:680px) { .recognition { margin-top:58px; }.recognition-heading { display:block; }.recognition-heading h3 { margin-top:12px; }.recognition-grid,.highlight-grid { grid-template-columns:1fr; } }
 .project-visual::after { position:absolute; inset:0; content:''; background:linear-gradient(180deg,transparent 48%,rgb(13 69 71 / .62)); }
 .project-visual>span,.project-visual b { position:relative; z-index:1; }
 .project-visual b { font-size:.65rem; }

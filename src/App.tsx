@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { ArrowDownToLine, ArrowUpRight, Download, Mail, MapPin, Menu, Moon, Send, Sun, X } from 'lucide-react'
+import { achievements } from './data/archive'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { experience } from './data/experience'
 import { galleryItems, type GalleryItem } from './data/gallery'
@@ -70,7 +71,7 @@ function Skills() {
 }
 
 function Experience() {
-  return <section className="page-section experience" id="experience"><Reveal><SectionHeading label="04 / EXPERIENCE" title="Selected experience." /></Reveal><div className="experience-list">{experience.map((item, index) => <Reveal className="experience-item" delay={index * .08} key={item.organization}><div className="experience-period">{item.period}</div><div><h3>{item.organization}</h3><h4>{item.role}</h4><ul><li>{item.work.split(',')[0]}.</li><li>{item.focus.split(' · ').slice(0, 2).join(' and ')}.</li></ul><div className="tag-list">{item.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div></div></Reveal>)}</div><Reveal className="experience-records" delay={.12}><div><span>AWARD / RECOGNITION</span><p>IEEE Best Project Innovation Award · I2CONNECT — IEEE Mangalore Section</p></div><div><span>WORKSHOP / KNOWLEDGE</span><p>Quantum Computing Basics workshop · 50+ students across two engineering colleges</p></div><div><span>PROJECT / RECOGNITION</span><p>KSCST Government Project Grant Funding · Innovation Project</p></div></Reveal></section>
+  return <section className="page-section experience" id="experience"><Reveal><SectionHeading label="04 / EXPERIENCE" title="Experience." /></Reveal><div className="experience-list">{experience.map((item, index) => <Reveal className="experience-item" delay={index * .08} key={item.organization}><div className="experience-period">{item.period}</div><div><h3>{item.organization}</h3><h4>{item.role}</h4><ul><li>{item.work.split(',')[0]}.</li><li>{item.focus.split(' · ').slice(0, 2).join(' and ')}.</li></ul><div className="tag-list">{item.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div></div></Reveal>)}</div></section>
 }
 
 const projectImages = [
@@ -82,8 +83,29 @@ const projectImages = [
 
 function ProjectVisual({ number, image, alt }: { number: string; image: string; alt: string }) { return <div className="project-visual"><img src={image} alt={alt} /><span>{number}</span><b>PROJECT / SYSTEM</b></div> }
 
+function projectResult(impact: string) {
+  return impact.replace(' · Research paper · Patent', '').replace(' · Patent', '')
+}
+
 function Projects() {
-  return <section className="page-section projects" id="projects"><Reveal><SectionHeading label="05 / PROJECTS" title="Selected work." /></Reveal><div className="project-grid">{projects.map((project, index) => <Reveal className="project-card" delay={index * .06} key={project.number}><ProjectVisual number={project.number} image={projectImages[index][0]} alt={projectImages[index][1]} /><div className="project-card-body"><div className="project-card-title"><h3>{project.title.replace(' USING RASPBERRY PI AND CNN', '').replace(' FOR ENHANCING NIGHT VISION', '')}</h3><ArrowUpRight size={19} /></div><p>{project.summary}</p><div className="tag-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div><strong>{project.impact}</strong></div></Reveal>)}</div></section>
+  return <section className="page-section projects" id="projects"><Reveal><SectionHeading label="05 / PROJECTS" title="Projects." /></Reveal><div className="project-grid">{projects.map((project, index) => <Reveal className="project-card" delay={index * .06} key={project.number}><ProjectVisual number={project.number} image={projectImages[index][0]} alt={projectImages[index][1]} /><div className="project-card-body"><div className="project-card-title"><h3>{project.title.replace(' USING RASPBERRY PI AND CNN', '').replace(' FOR ENHANCING NIGHT VISION', '')}</h3><ArrowUpRight size={19} /></div><p>{project.summary}</p><div className="tag-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div><strong>{projectResult(project.impact)}</strong></div></Reveal>)}</div><Recognition /></section>
+}
+
+const competitionHighlights: { image: string; event: string; result: string; description: string }[] = []
+
+function Recognition() {
+  const award = achievements.find(([label]) => label === 'IEEE')
+  const grant = achievements.find(([label]) => label === 'KSCST')
+  const publication = achievements.find(([label]) => label === 'RESEARCH')
+  const patents = achievements.find(([label]) => label === 'PATENTS')
+  const workshop = achievements.find(([label]) => label === 'KNOWLEDGE SHARING')
+  const records = [
+    ['AWARDS / COMPETITIONS', 'Best Project Innovation Award', `${award?.[2]} · ${grant?.[1]} — ${grant?.[2]}`],
+    ['PUBLICATIONS', 'Published research paper', `${publication?.[2]} · Oral Cancer Detection Using Raspberry Pi and CNN for Early Diagnosis`],
+    ['PATENTS', 'Oral Cancer Detection · Matrix Headlight', patents?.[2] ?? ''],
+    ['WORKSHOPS / KNOWLEDGE SHARING', 'Quantum Computing Basics workshop', workshop?.[2] ?? ''],
+  ] as const
+  return <div className="recognition"><Reveal><div className="recognition-heading"><p className="eyebrow">PROJECT EVIDENCE</p><h3>Achievements &amp; Recognition.</h3></div></Reveal><div className="recognition-grid">{records.map(([label, title, detail]) => <Reveal className="recognition-item" delay={.04} key={label}><span>{label}</span><h4>{title}</h4><p>{detail}</p></Reveal>)}</div><div className="highlight-area"><p className="eyebrow">FUTURE EVIDENCE</p><h4>Competition &amp; Event Highlights</h4>{competitionHighlights.length === 0 ? <p className="highlight-empty">Future entries can include an image, event or competition name, award or result, and a short description.</p> : <div className="highlight-grid">{competitionHighlights.map((highlight) => <article key={`${highlight.event}-${highlight.result}`}><img src={highlight.image} alt={highlight.event} /><strong>{highlight.event}</strong><span>{highlight.result}</span><p>{highlight.description}</p></article>)}</div>}</div></div>
 }
 
 function Contact() {
