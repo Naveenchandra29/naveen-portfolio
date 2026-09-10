@@ -1,6 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { ArrowDownToLine, ArrowUpRight, Download, Mail, MapPin, Menu, Moon, Send, Sun, X } from 'lucide-react'
-import { achievements } from './data/archive'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { experience } from './data/experience'
 import { galleryItems, type GalleryItem } from './data/gallery'
@@ -91,21 +90,34 @@ function Projects() {
   return <section className="page-section projects" id="projects"><Reveal><SectionHeading label="05 / PROJECTS" title="Projects." /></Reveal><div className="project-grid">{projects.map((project, index) => <Reveal className="project-card" delay={index * .06} key={project.number}><ProjectVisual number={project.number} image={projectImages[index][0]} alt={projectImages[index][1]} /><div className="project-card-body"><div className="project-card-title"><h3>{project.title.replace(' USING RASPBERRY PI AND CNN', '').replace(' FOR ENHANCING NIGHT VISION', '')}</h3><ArrowUpRight size={19} /></div><p>{project.summary}</p><div className="tag-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div><strong>{projectResult(project.impact)}</strong></div></Reveal>)}</div><Recognition /></section>
 }
 
-const competitionHighlights: { image: string; event: string; result: string; description: string }[] = []
+type AchievementEvidence = { image: string; title: string; description: string; alt: string; link?: string; action?: string }
+
+const achievementEvidence: AchievementEvidence[] = [
+  { image: '/achievements/awards/i2connect-award.jpg', title: 'Best Project Innovation Award', description: 'I2CONNECT — IEEE Mangalore Section.', alt: 'I2CONNECT Best Project Innovation Award evidence' },
+  { image: '/achievements/awards/project-competition.jpg', title: 'Project Competition', description: 'Project competition evidence.', alt: 'Project competition evidence' },
+  { image: '/achievements/awards/mavensiliconworkshop.png', title: 'Maven Silicon Workshop', description: '', alt: 'Maven Silicon workshop evidence' },
+  { image: '/achievements/awards/manthan2025.png', title: 'Manthan 2025', description: '', alt: 'Manthan 2025 recognition evidence' },
+  { image: '/achievements/awards/infosysspringboard.png', title: 'Infosys Springboard', description: '', alt: 'Infosys Springboard evidence' },
+  { image: '/achievements/awards/ieeemembership.png', title: 'IEEE Membership', description: '', alt: 'IEEE membership evidence' },
+  { image: '/achievements/awards/code6crazehackathon.png', title: 'Code6Craze Hackathon', description: '', alt: 'Code6Craze hackathon evidence' },
+  { image: '/achievements/awards/sqlbasicshackerrank.png', title: 'SQL Basics HackerRank', description: '', alt: 'HackerRank SQL Basics evidence' },
+  { image: '/achievements/awards/quantumworkshopdsu.png', title: 'Quantum Workshop DSU', description: '', alt: 'Quantum workshop at DSU evidence' },
+  { image: '/achievements/awards/quantumworkshopamc.png', title: 'Quantum Workshop AMC', description: '', alt: 'Quantum workshop at AMC evidence' },
+  { image: '/achievements/awards/volunteering.png', title: 'Volunteering', description: '', alt: 'Volunteering recognition evidence' },
+  { image: '/achievements/awards/vicharamanthanaworkshop.png', title: 'Vicharamanthan Workshop', description: '', alt: 'Vicharamanthan workshop evidence' },
+  { image: '/achievements/awards/workshoponwheelsmysore.png', title: 'Workshop on Wheels Mysore', description: '', alt: 'Workshop on Wheels Mysore evidence' },
+  { image: '/achievements/publications/researchpaper.png', title: 'Oral Cancer Detection Using Raspberry Pi and CNN for Early Diagnosis', description: '', alt: 'Oral Cancer Detection research paper preview', link: '/achievements/publications/researchpaper.pdf', action: 'VIEW PAPER ↗' },
+  { image: '/achievements/patents/oral-cancer-patent.png', title: 'Oral Cancer Detection', description: '', alt: 'Oral Cancer Detection patent evidence preview', action: 'VIEW PATENT ↗' },
+  { image: '/achievements/patents/matrix-headlight-patent.png', title: 'Matrix Headlight', description: '', alt: 'Matrix Headlight patent evidence preview', action: 'VIEW PATENT ↗' },
+] as const
 
 function Recognition() {
-  const award = achievements.find(([label]) => label === 'IEEE')
-  const grant = achievements.find(([label]) => label === 'KSCST')
-  const publication = achievements.find(([label]) => label === 'RESEARCH')
-  const patents = achievements.find(([label]) => label === 'PATENTS')
-  const workshop = achievements.find(([label]) => label === 'KNOWLEDGE SHARING')
-  const records = [
-    ['AWARDS / COMPETITIONS', 'Best Project Innovation Award', `${award?.[2]} · ${grant?.[1]} — ${grant?.[2]}`],
-    ['PUBLICATIONS', 'Published research paper', `${publication?.[2]} · Oral Cancer Detection Using Raspberry Pi and CNN for Early Diagnosis`],
-    ['PATENTS', 'Oral Cancer Detection · Matrix Headlight', patents?.[2] ?? ''],
-    ['WORKSHOPS / KNOWLEDGE SHARING', 'Quantum Computing Basics workshop', workshop?.[2] ?? ''],
-  ] as const
-  return <div className="recognition"><Reveal><div className="recognition-heading"><p className="eyebrow">PROJECT EVIDENCE</p><h3>Achievements &amp; Recognition.</h3></div></Reveal><div className="recognition-grid">{records.map(([label, title, detail]) => <Reveal className="recognition-item" delay={.04} key={label}><span>{label}</span><h4>{title}</h4><p>{detail}</p></Reveal>)}</div><div className="highlight-area"><p className="eyebrow">FUTURE EVIDENCE</p><h4>Competition &amp; Event Highlights</h4>{competitionHighlights.length === 0 ? <p className="highlight-empty">Future entries can include an image, event or competition name, award or result, and a short description.</p> : <div className="highlight-grid">{competitionHighlights.map((highlight) => <article key={`${highlight.event}-${highlight.result}`}><img src={highlight.image} alt={highlight.event} /><strong>{highlight.event}</strong><span>{highlight.result}</span><p>{highlight.description}</p></article>)}</div>}</div></div>
+  return <div className="recognition"><Reveal><div className="recognition-heading"><h3>Professional Highlights.</h3></div></Reveal><EvidencePreview /></div>
+}
+
+function EvidencePreview() {
+  const evidenceItems = achievementEvidence.map((item) => ({ ...item, link: item.link ?? item.image, action: item.action ?? '' }))
+  return <div className="evidence-preview"><div className="evidence-gallery">{evidenceItems.map((item) => <a className="evidence-card" href={item.link} target="_blank" rel="noreferrer" key={item.image}><img src={item.image} alt={item.alt} /><strong>{item.title}</strong>{item.description && <span>{item.description}</span>}{item.action && <em>{item.action}</em>}</a>)}</div></div>
 }
 
 function Contact() {
