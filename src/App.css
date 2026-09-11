@@ -231,3 +231,59 @@ footer { font-size:.72rem; }
 @media (max-width:767px) { .nav-wrap { width:calc(100% - 36px); }.brand { font-size:.78rem; }.page-section { padding-top:88px; padding-bottom:88px; }.hero { grid-template-columns:1fr; gap:42px; }.hero-copy { max-width:none; }.hero-visual { order:2; min-height:0; padding:18px; }.profile-image { max-width:420px; }.project-grid { grid-template-columns:1fr; }.project-card { min-width:0; width:100%; }.experience-item { grid-template-columns:1fr; gap:10px; }.education-timeline article { grid-template-columns:1fr; gap:8px; padding-left:24px; }.education-period { margin-bottom:2px; }.contact-grid { grid-template-columns:1fr; gap:36px; }.contact-form { width:100%; }.contact-form input,.contact-form textarea { max-width:100%; }.recognition-heading { grid-template-columns:1fr; }.engineering-motif svg { width:170%; transform:translateX(-18%); }.footer-identity { width:100%; } }
 @media (max-width:480px) { .hero h1 { font-size:clamp(2.7rem,14vw,4rem); }.hero-actions { align-items:stretch; flex-direction:column; }.hero-actions .button { justify-content:center; }.nav-wrap { min-height:64px; }.mobile-nav a { padding:15px 18px; } }
 @media (prefers-reduced-motion:reduce) { .section-heading::after { animation:none; transform:none; }.engineering-motif .motif-signal { display:none; } }
+/* Mobile responsive fixes */
+@media (max-width: 767px) {
+  .about-grid {
+    display: block;
+  }
+
+  .about-grid > * {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .education-timeline article {
+    display: block;
+    width: 100%;
+  }
+
+  .education-timeline article > * {
+    max-width: 100%;
+  }
+
+  .contact-grid {
+    display: block;
+  }
+
+  .contact-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .contact-details {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .contact-details div {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1fr);
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .contact-details p,
+  .contact-details a {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+}
