@@ -10,9 +10,10 @@ const navItems = [['ABOUT', '#about'], ['EDUCATION', '#education'], ['SKILLS', '
 const skillGroups = [
   ['LANGUAGES', ['Python', 'Java', 'SQL', 'Kotlin', 'Golang']],
   ['AI / ML', ['TensorFlow', 'Keras', 'OpenCV', 'CNN', 'Image Processing']],
-  ['EMBEDDED', ['Arduino', 'Raspberry Pi', 'Embedded C', 'PWM', 'IoT']],
+  ['EMBEDDED', ['Embedded C', 'Arduino', 'Raspberry Pi', 'Sensor Interfacing','PWM', 'IoT']],
   ['ANDROID', ['Android Studio', 'Jetpack Compose', 'Firebase', 'REST APIs']],
   ['SECURITY', ['TLS 1.3', 'ML-KEM', 'X25519', 'mTLS']],
+  ['TOOLS & PLATFORMS', ['Git', 'Docker', 'VS Code', 'Jupyter', 'Arduino IDE', 'Jira']],
 ] as const
 
 function Reveal({ children, className = '', id, delay = 0 }: { children: ReactNode; className?: string; id?: string; delay?: number }) {
@@ -43,7 +44,7 @@ function Header() {
     sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
   }, [isGallery])
-  return <header className="site-header"><div className="nav-wrap"><a className="brand" href={homeHref('#top')}>NAVEEN<span>.</span></a><nav className="desktop-nav" aria-label="Main navigation">{links.map(([label, href]) => <a className={active === href ? 'active' : ''} aria-current={active === href ? 'page' : undefined} href={homeHref(href)} key={label}>{label}</a>)}</nav><div className="header-actions"><ThemeToggle /><button className="menu-toggle" type="button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></div></div><AnimatePresence>{open && <motion.nav className="mobile-nav" aria-label="Mobile navigation" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>{links.map(([label, href]) => <a className={active === href ? 'active' : ''} aria-current={active === href ? 'page' : undefined} href={homeHref(href)} key={label} onClick={() => setOpen(false)}>{label}<ArrowUpRight size={14} /></a>)}</motion.nav>}</AnimatePresence></header>
+  return <header className="site-header"><div className="nav-wrap"><a className="brand" href={homeHref('#top')}>M NAVEEN CHANDRA</a><nav className="desktop-nav" aria-label="Main navigation">{links.map(([label, href]) => <a className={active === href ? 'active' : ''} aria-current={active === href ? 'page' : undefined} href={homeHref(href)} key={label}>{label}</a>)}</nav><div className="header-actions"><ThemeToggle /><button className="menu-toggle" type="button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></div></div><AnimatePresence>{open && <motion.nav className="mobile-nav" aria-label="Mobile navigation" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>{links.map(([label, href]) => <a className={active === href ? 'active' : ''} aria-current={active === href ? 'page' : undefined} href={homeHref(href)} key={label} onClick={() => setOpen(false)}>{label}<ArrowUpRight size={14} /></a>)}</motion.nav>}</AnimatePresence></header>
 }
 
 function EngineeringMotif() {
@@ -52,25 +53,36 @@ function EngineeringMotif() {
 }
 
 function Hero() {
-  return <section className="hero page-section" id="top"><div className="hero-copy"><Reveal><p className="eyebrow">I AM</p></Reveal><Reveal delay={.08}><h1>M NAVEEN<br />CHANDRA</h1></Reveal><Reveal delay={.16}><p className="hero-role">Electronics &amp; Communication Engineer</p></Reveal><Reveal delay={.24}><p className="hero-description">I build across embedded systems, intelligent software and secure communication.</p></Reveal><Reveal className="hero-actions" delay={.32}><a className="button button-primary" href="#projects">VIEW PROJECTS <ArrowUpRight size={16} /></a><a className="button button-secondary" href="/resume.pdf" target="_blank" rel="noreferrer">DOWNLOAD RESUME <ArrowDownToLine size={16} /></a></Reveal><Reveal className="hero-socials" delay={.4}><a href="#contact">GitHub</a><a href="#contact">LinkedIn</a><span>Bengaluru, India</span></Reveal></div><Reveal className="hero-visual" delay={.18}><div className="visual-label">HARDWARE / SOFTWARE / SECURITY</div><div className="system-mark" aria-hidden="true"><span /><span /><span /><i /><i /><i /></div></Reveal></section>
+  const [imageAvailable, setImageAvailable] = useState(true)
+  return <section className="hero page-section" id="top"><div className="hero-copy"><Reveal><p className="eyebrow">Hello I'm</p></Reveal><Reveal delay={.08}><h1>M NAVEEN<br />CHANDRA</h1></Reveal><Reveal delay={.16}><p className="hero-role">Electronics &amp; Communication Engineer</p></Reveal><Reveal delay={.24}><p className="hero-description">I build practical engineering solutions across software, embedded systems, AI/ML and secure communication</p></Reveal><Reveal className="hero-actions" delay={.32}><a className="button button-primary" href="#projects">VIEW PROJECTS <ArrowUpRight size={16} /></a><a className="button button-secondary" href="/resume.pdf" target="_blank" rel="noreferrer">DOWNLOAD RESUME <ArrowDownToLine size={16} /></a></Reveal><Reveal className="hero-socials" delay={.4}><a href="#contact">GitHub</a><a href="#contact">LinkedIn</a><span>Bengaluru, India</span></Reveal></div><Reveal className="hero-visual" delay={.18}>{imageAvailable ? <img className="profile-image" src="/profile/naveen-profile.jpg" alt="Portrait of M Naveen Chandra" onError={() => setImageAvailable(false)} /> : <div className="system-mark" aria-hidden="true"><span /><span /><span /><i /><i /><i /></div>}</Reveal></section>
 }
 
 function SectionHeading({ label, title }: { label: string; title: string }) { return <div className="section-heading"><p className="eyebrow">{label}</p><h2>{title}</h2></div> }
 
 function About() {
-  return <section className="page-section about" id="about"><Reveal><SectionHeading label="01 / ABOUT" title="Engineering across physical and digital systems." /></Reveal><Reveal className="about-grid" delay={.08}><div><p className="education-title">B.E. Electronics and Communication Engineering</p><p className="muted">AMC Engineering College<br />CGPA: 7.97 / 10</p></div><p className="about-copy">I work across embedded systems, AI/ML, Android development and secure communication. My projects move between physical devices and intelligent software, with a focus on building useful systems that can work in the real world.</p></Reveal></section>
+  return <section className="page-section about" id="about"><Reveal><SectionHeading label="01 / ABOUT" title="Building across hardware, software and intelligent systems" /></Reveal><Reveal className="about-grid" delay={.08}><div><p className="education-title">B.E. Electronics and Communication Engineering</p><p className="muted">AMC Engineering College<br />CGPA: 7.97 / 10</p></div><p className="about-copy">I’m an Electronics & Communication Engineer with hands-on experience in software development, embedded systems, AI/ML and secure communication. I enjoy building practical solutions that connect hardware and software, from intelligent edge applications to secure and connected systems.</p></Reveal></section>
 }
 
 function Education() {
-  return <section className="page-section education" id="education"><Reveal><SectionHeading label="02 / EDUCATION" title="Education." /></Reveal><Reveal className="education-timeline" delay={.08}><article><div className="education-period">2022 — 2026</div><div className="education-marker" aria-hidden="true" /><div><h3>B.E. Electronics &amp; Communication Engineering</h3><p>AMC Engineering College</p><strong>CGPA: 7.97 / 10</strong></div></article></Reveal></section>
+  const entries = [['2022 — 2026', 'AMC ENGINEERING COLLEGE', 'Bachelor of Engineering in Electronics & Communication Engineering', 'CGPA: 7.97 / 10'], ['2020 — 2022', 'NARAYANA PU COLLEGE','PCMB', '']] as const
+  return <section className="page-section education" id="education"><Reveal><SectionHeading label="02 / EDUCATION" title="Education" /></Reveal><Reveal className="education-timeline" delay={.08}>{entries.map(([period, title, institution, detail]) => <article key={title}><div className="education-period">{period}</div><div className="education-marker" aria-hidden="true" /><div><h3>{title}</h3>{institution && <p>{institution}</p>}{detail && <strong>{detail}</strong>}</div></article>)}</Reveal></section>
 }
 
 function Skills() {
-  return <section className="page-section skills-section" id="skills"><Reveal><SectionHeading label="03 / SKILLS" title="Technical range." /></Reveal><Reveal className="skills" delay={.08}><div className="skill-grid">{skillGroups.map(([group, items]) => <div className="skill-group" key={group}><p>{group}</p><div>{items.map((item) => <span key={item}>{item}</span>)}</div></div>)}</div><div className="certificate-inline"><span>CERTIFICATIONS</span><p>HackerRank SQL Basic · Infosys Springboard DSA</p></div></Reveal></section>
+  return <section className="page-section skills-section" id="skills"><Reveal><SectionHeading label="03 / SKILLS" title="Technical Skills" /></Reveal><Reveal className="skills" delay={.08}><div className="skill-grid">{skillGroups.map(([group, items]) => <div className="skill-group" key={group}><p>{group}</p><div>{items.map((item) => <span key={item}>{item}</span>)}</div></div>)}</div></Reveal></section>
 }
 
 function Experience() {
-  return <section className="page-section experience" id="experience"><Reveal><SectionHeading label="04 / EXPERIENCE" title="Experience." /></Reveal><div className="experience-list">{experience.map((item, index) => <Reveal className="experience-item" delay={index * .08} key={item.organization}><div className="experience-period">{item.period}</div><div><h3>{item.organization}</h3><h4>{item.role}</h4><ul><li>{item.work.split(',')[0]}.</li><li>{item.focus.split(' · ').slice(0, 2).join(' and ')}.</li></ul><div className="tag-list">{item.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div></div></Reveal>)}</div></section>
+  return <section className="page-section experience" id="experience"><Reveal><SectionHeading label="04 / EXPERIENCE" title="Experience" /></Reveal><div className="experience-list">{experience.map((item, index) => <Reveal className="experience-item" delay={index * .08} key={item.organization}><div className="experience-period">{item.period}</div><div><h3>{item.organization}</h3><h4>{item.role}</h4><p className="experience-description">{item.work}</p>{item.evidence && (
+  <a
+    className="experience-evidence"
+    href={item.evidence}
+    target="_blank"
+    rel="noreferrer"
+  >
+    {item.evidenceLabel ?? 'VIEW CERTIFICATE ↗'}
+  </a>
+)}</div></Reveal>)}</div></section>
 }
 
 const projectImages = [
@@ -86,8 +98,19 @@ function projectResult(impact: string) {
   return impact.replace(' · Research paper · Patent', '').replace(' · Patent', '')
 }
 
+function ReportLink({ path }: { path?: string }) {
+  const [available, setAvailable] = useState(false)
+  useEffect(() => {
+    if (!path) return
+    let mounted = true
+    fetch(path, { method: 'HEAD' }).then((response) => { if (mounted && response.ok && response.headers.get('content-type')?.includes('application/pdf')) setAvailable(true) }).catch(() => undefined)
+    return () => { mounted = false }
+  }, [path])
+  return available ? <a className="project-report" href={path} target="_blank" rel="noreferrer">VIEW REPORT ↗</a> : null
+}
+
 function Projects() {
-  return <section className="page-section projects" id="projects"><Reveal><SectionHeading label="05 / PROJECTS" title="Projects." /></Reveal><div className="project-grid">{projects.map((project, index) => <Reveal className="project-card" delay={index * .06} key={project.number}><ProjectVisual number={project.number} image={projectImages[index][0]} alt={projectImages[index][1]} /><div className="project-card-body"><div className="project-card-title"><h3>{project.title.replace(' USING RASPBERRY PI AND CNN', '').replace(' FOR ENHANCING NIGHT VISION', '')}</h3><ArrowUpRight size={19} /></div><p>{project.summary}</p><div className="tag-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div><strong>{projectResult(project.impact)}</strong></div></Reveal>)}</div><Recognition /></section>
+  return <section className="page-section projects" id="projects"><Reveal><SectionHeading label="05 / PROJECTS" title="Projects" /></Reveal><div className="project-grid">{projects.map((project, index) => <Reveal className="project-card" delay={index * .06} key={project.number}><ProjectVisual number={project.number} image={projectImages[index][0]} alt={projectImages[index][1]} /><div className="project-card-body"><div className="project-card-title"><h3>{project.title.replace(' USING RASPBERRY PI AND CNN', '').replace(' FOR ENHANCING NIGHT VISION', '')}</h3><ArrowUpRight size={19} /></div><p>{project.summary}</p><div className="tag-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div><strong>{projectResult(project.impact)}</strong><ReportLink path={project.report} /></div></Reveal>)}</div><Recognition /></section>
 }
 
 type AchievementEvidence = { image: string; title: string; description: string; alt: string; link?: string; action?: string }
@@ -105,7 +128,7 @@ const achievementEvidence: AchievementEvidence[] = [
 ]
 
 function Recognition() {
-  return <div className="recognition"><Reveal><div className="recognition-heading"><h3>Professional Highlights.</h3></div></Reveal><EvidencePreview /></div>
+  return <div className="recognition"><Reveal><div className="recognition-heading"><h3>Professional Highlights</h3></div></Reveal><EvidencePreview /></div>
 }
 
 function EvidencePreview() {
@@ -114,7 +137,71 @@ function EvidencePreview() {
 }
 
 function Contact() {
-  return <section className="page-section contact" id="contact"><Reveal><SectionHeading label="06 / CONTACT" title="Let&apos;s connect." /></Reveal><div className="contact-grid"><Reveal className="contact-content" delay={.08}><p>I&apos;m open to opportunities in software engineering, product development and technically challenging projects.</p><div className="contact-actions"><a className="button button-primary" href="mailto:naveenchandram2004@gmail.com"><Mail size={16} /> EMAIL ME <ArrowUpRight size={16} /></a><a href="https://github.com/Naveenchandra29" target="_blank" rel="noreferrer"><ArrowUpRight size={16} /> GitHub</a><a href="#contact"><ArrowUpRight size={16} /> LinkedIn</a><a href="/resume.pdf" target="_blank" rel="noreferrer"><Download size={16} /> Resume</a></div></Reveal><Reveal className="contact-details" delay={.14}><div><span><Mail size={13} /> EMAIL</span><a href="mailto:naveenchandram2004@gmail.com">naveenchandram2004@gmail.com</a></div><div><span><MapPin size={13} /> LOCATION</span><p>Bengaluru, India</p></div><div><span><ArrowUpRight size={13} /> LINKEDIN</span><p>M Naveen Chandra</p></div><div><span><ArrowUpRight size={13} /> GITHUB</span><a href="https://github.com/Naveenchandra29" target="_blank" rel="noreferrer">Naveenchandra29</a></div></Reveal><Reveal className="contact-form" delay={.2}><form onSubmit={(event) => event.preventDefault()}><label>Your Name<input name="name" type="text" autoComplete="name" placeholder="Your Name" /></label><label>Your Email<input name="email" type="email" autoComplete="email" placeholder="you@example.com" /></label><label>Your Message<textarea name="message" rows={4} placeholder="How can we work together?" /></label><button className="button button-primary" type="submit">SEND MESSAGE <Send size={15} /></button><small>Form preview only · no backend connected</small></form></Reveal></div></section>
+  return <section className="page-section contact" id="contact"><Reveal><SectionHeading label="06 / CONTACT" title="Let&apos;s connect" /></Reveal><div className="contact-grid"><Reveal className="contact-content" delay={.08}><p>I’m open to software and embedded engineering opportunities, collaborative projects, and building practical solutions that create real-world impact.</p><div className="contact-actions"><a className="button button-primary" href="mailto:naveenchandram2004@gmail.com"><Mail size={16} /> EMAIL ME <ArrowUpRight size={16} /></a><a href="https://github.com/Naveenchandra29" target="_blank" rel="noreferrer"><ArrowUpRight size={16} /> GitHub</a><a
+  href="https://www.linkedin.com/in/m-naveen-chandra"
+  target="_blank"
+  rel="noreferrer"
+>
+  <ArrowUpRight size={16} /> LinkedIn
+</a><a href="/resume.pdf" target="_blank" rel="noreferrer"><Download size={16} /> Resume</a></div></Reveal><Reveal className="contact-details" delay={.14}><div><span><Mail size={13} /> EMAIL</span><a href="mailto:naveenchandram2004@gmail.com">naveenchandram2004@gmail.com</a></div><div><span><MapPin size={13} /> LOCATION</span><p>Bengaluru, India</p></div><div><span><ArrowUpRight size={13} /> LINKEDIN</span><p><a
+  href="https://www.linkedin.com/in/m-naveen-chandra"
+  target="_blank"
+  rel="noreferrer"
+>
+  M Naveen Chandra
+</a></p></div><div><span><ArrowUpRight size={13} /> GITHUB</span><a href="https://github.com/Naveenchandra29" target="_blank" rel="noreferrer">Naveenchandra29</a></div></Reveal><Reveal className="contact-form" delay={.2}><form
+  onSubmit={(event) => {
+    event.preventDefault()
+
+    const form = event.currentTarget
+    const name = (form.elements.namedItem('name') as HTMLInputElement).value
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value
+    const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value
+
+    const subject = `Portfolio Contact from ${name}`
+    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+
+    window.location.href = `mailto:naveenchandram2004@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  }}
+>
+  <label>
+    Your Name*
+    <input
+      name="name"
+      type="text"
+      autoComplete="name"
+      placeholder=""
+      required
+    />
+  </label>
+
+  <label>
+    Email*
+    <input
+      name="email"
+      type="email"
+      autoComplete="email"
+      placeholder=""
+      required
+    />
+  </label>
+
+  <label>
+    Share Your Message
+    <textarea
+      name="message"
+      rows={4}
+      placeholder=""
+      required
+    />
+  </label>
+
+  <button className="button button-primary" type="submit">
+    SEND MESSAGE <Send size={15} />
+  </button>
+
+  <small>Let’s build something meaningful</small>
+</form></Reveal></div></section>
 }
 
 function Footer() { return <footer><div className="footer-identity"><strong>M NAVEEN CHANDRA</strong><span>Electronics &amp; Communication Engineer</span><span>Bengaluru, India</span></div><span>© 2026 M Naveen Chandra</span></footer> }
