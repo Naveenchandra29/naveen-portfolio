@@ -17,7 +17,25 @@ footer { width:min(1160px,calc(100% - 48px)); display:flex; justify-content:spac
 @media (max-width:900px) { .desktop-nav,.resume-link { display:none; }.menu-toggle { display:grid; }.mobile-nav { display:grid; overflow:hidden; border-top:1px solid var(--border); background:var(--background); }.mobile-nav a { display:flex; align-items:center; justify-content:space-between; padding:15px 24px; border-bottom:1px solid var(--border); color:var(--text); font-family:var(--mono); font-size:.68rem; letter-spacing:.07em; text-decoration:none; }.hero { grid-template-columns:1fr; gap:50px; }.hero-visual { max-width:600px; min-height:260px; }.gallery-grid { grid-template-columns:repeat(2,1fr); } }
 @media (max-width:680px) { .nav-wrap,main,footer { width:min(100% - 36px,1160px); }.page-section { padding:78px 0; }.hero { min-height:auto; padding-top:70px; }.hero h1 { font-size:clamp(2.8rem,14vw,4.3rem); }.hero-description { font-size:.98rem; }.hero-socials { flex-wrap:wrap; gap:14px; }.hero-socials span { width:100%; padding:0; border:0; }.section-heading { display:block; margin-bottom:34px; }.section-heading .eyebrow { margin-bottom:14px; }.about-grid,.skill-grid { grid-template-columns:1fr; gap:30px; }.skills { margin-top:56px; }.experience-item,.achievement-item { grid-template-columns:1fr; gap:10px; }.project-grid,.certificate-grid,.gallery-grid { grid-template-columns:1fr; }.project-card-body>p { min-height:0; }.contact-content>p { font-size:1rem; }.contact-actions { align-items:flex-start; flex-direction:column; gap:16px; }.gallery-main { padding-top:70px; padding-bottom:70px; }.gallery-filter { margin-top:44px; flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; }.gallery-filter button { flex:0 0 auto; }footer { align-items:flex-start; flex-direction:column; gap:9px; } }
 @media (prefers-reduced-motion:reduce) { .project-card,.button { transition:none; } }
+@media (max-width:767px) {
+  .about-grid {
+    grid-template-columns:1fr;
+    gap:30px;
+  }
 
+  .education-timeline article {
+    grid-template-columns:1fr;
+  }
+
+  .contact-grid {
+    grid-template-columns:1fr;
+  }
+
+  .experience-item,
+  .achievement-item {
+    grid-template-columns:1fr;
+  }
+}
 .site-header { background:var(--background); backdrop-filter:none; }
 .eyebrow { color:var(--coral); }
 .hero h1,.section-heading h2,.project-card-title h3,.certificate-card h3,.gallery-main h1,.experience-item h3 { font-weight:500; }
